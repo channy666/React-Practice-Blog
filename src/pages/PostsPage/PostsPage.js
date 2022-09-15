@@ -10,35 +10,85 @@ import { white, blue, earth } from "../../utils/colors";
 import dateIcon from "../../utils/images/calendar1.png";
 import starIcon from "../../utils/images/star.png";
 import authorIcon from "../../utils/images/author.png";
+import Loading from "../../component/Loading";
+import {
+  MEDIA_QUERY_XL,
+  MEDIA_QUERY_LG,
+  MEDIA_QUERY_MD,
+  MEDIA_QUERY_SM,
+} from "../../utils/breakpoints";
 
 const Root = styled.div`
   display: flex;
   padding: 80px 0px 50px 7vw;
   background: ${white.swan};
+  position: relative;
+
+  ${MEDIA_QUERY_XL} {
+    padding: 80px 0px 50px 5vw;
+  }
+
+  ${MEDIA_QUERY_LG} {
+    padding: 80px 0px 50px 0px;
+  }
 `;
 
 const Wrapper = styled.div``;
 
 const PostsContainer = styled.div`
   width: 65vw;
-  position: relative;
+
+  ${MEDIA_QUERY_XL} {
+    width: 70vw;
+  }
+
+  ${MEDIA_QUERY_LG} {
+    margin: 0 auto;
+    width: 75vw;
+  }
+
+  ${MEDIA_QUERY_MD} {
+    margin: 0 auto;
+    width: 80vw;
+  }
+
+  ${MEDIA_QUERY_SM} {
+    margin: 0 auto;
+    width: 85vw;
+  }
 `;
 
 const Posts = styled.div`
-  padding: 50px 3vw 30px 4vw;
+  padding: 30px 3vw 30px 2.5vw;
 `;
 
 const Post = styled(Link)`
   display: flex;
-  height: 150px;
   width: 50vw;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
   cursor: pointer;
   text-decoration: none;
   color: ${blue.darkest};
   flex-direction: column;
   padding: 10px 20px;
   border-radius: 10px;
+
+  ${MEDIA_QUERY_XL} {
+    width: 52vw;
+  }
+
+  ${MEDIA_QUERY_LG} {
+    width: 55vw;
+  }
+
+  ${MEDIA_QUERY_MD} {
+    width: 58vw;
+  }
+
+  ${MEDIA_QUERY_SM} {
+    width: 65vw;
+    padding: 10px 8px;
+  }
 `;
 
 const PostTitle = styled.div`
@@ -52,6 +102,24 @@ const PostTitle = styled.div`
   :hover {
     text-decoration: underline;
     color: ${earth.chocolate};
+  }
+
+  ${MEDIA_QUERY_XL} {
+    width: 53vw;
+  }
+
+  ${MEDIA_QUERY_LG} {
+    width: 55vw;
+  }
+
+  ${MEDIA_QUERY_MD} {
+    width: 59vw;
+    font-size: 20px;
+  }
+
+  ${MEDIA_QUERY_SM} {
+    width: 66vw;
+    font-size: 18px;
   }
 `;
 
@@ -71,6 +139,12 @@ const PostDateIcon = styled.div`
   align-self: center;
   margin-right: 10px;
   flex-shrink: 0;
+
+  ${MEDIA_QUERY_SM} {
+    height: 20px;
+    width: 20px;
+    margin-right: 8px;
+  }
 `;
 
 const PostDate = styled.div`
@@ -83,31 +157,64 @@ const PostDate = styled.div`
   color: ${earth.wood};
   margin-right: 3vw;
   flex-shrink: 0;
+
+  ${MEDIA_QUERY_XL} {
+    width: 10vw;
+  }
+
+  ${MEDIA_QUERY_LG} {
+    width: 14vw;
+  }
+
+  ${MEDIA_QUERY_MD} {
+    width: 20vw;
+  }
+
+  ${MEDIA_QUERY_SM} {
+    width: 105px;
+    font-size: 13px;
+  }
 `;
 
 const PostStarCount = styled(PostDate)`
   width: 5vw;
+
+  ${MEDIA_QUERY_XL} {
+    width: 6vw;
+  }
+
+  ${MEDIA_QUERY_LG} {
+    width: 9vw;
+  }
+
+  ${MEDIA_QUERY_MD} {
+    width: 12vw;
+  }
+
+  ${MEDIA_QUERY_SM} {
+    width: 65px;
+  }
 `;
 
-const PostStarIcon = styled(PostDateIcon)``;
+const PostStarIcon = styled(PostDateIcon)`
+  margin-right: 8px;
+
+  ${MEDIA_QUERY_SM} {
+    margin-right: 5px;
+  }
+`;
 
 const PostAuthor = styled(PostDate)`
-  width: 22vw;
   white-space: nowrap;
+  width: auto;
 `;
 
 const PostAuthorIcon = styled(PostDateIcon)`
   margin-right: 5px;
-`;
 
-const Loading = styled.div`
-  width: 100%;
-  height: 400px;
-  font-size: 28px;
-  font-weight: bold;
-  text-align: center;
-  padding-top: 50px;
-  letter-spacing: 3px;
+  ${MEDIA_QUERY_SM} {
+    margin-right: 3px;
+  }
 `;
 
 function PostsPage() {
@@ -128,6 +235,7 @@ function PostsPage() {
   }, [category]);
 
   useEffect(() => {
+    setIsLoading(true);
     getPosts(currentPage, category, filter)
       .then((res) => {
         const totalPage = Math.ceil(res.headers.get("X-Total-Count") / 10);

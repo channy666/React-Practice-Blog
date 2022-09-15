@@ -3,6 +3,12 @@ import { memo } from "react";
 import { blue, earth, white } from "../utils/colors";
 import websiteLogo from "../utils/images/LOGO.png";
 import emailIcon from "../utils/images/email.png";
+import {
+  MEDIA_QUERY_XL,
+  MEDIA_QUERY_LG,
+  MEDIA_QUERY_MD,
+  MEDIA_QUERY_SM,
+} from "../utils/breakpoints";
 
 const FooterContainer = styled.div`
   width: 100%;
@@ -12,6 +18,10 @@ const FooterContainer = styled.div`
   justify-content: space-between;
   box-sizing: border-box;
   border-top: 1px solid rgba(60, 63, 78, 0.1);
+
+  ${MEDIA_QUERY_LG} {
+    flex-direction: column;
+  }
 `;
 
 const FooterLeft = styled.div``;
@@ -20,11 +30,24 @@ const WebsiteBrand = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 20px;
+
+  ${MEDIA_QUERY_LG} {
+    justify-content: center;
+  }
 `;
 
 const WebsiteLogo = styled.img`
-  height: 70px;
+  height: 60px;
   width: auto;
+  margin-right: 10px;
+
+  ${MEDIA_QUERY_LG} {
+    height: 50px;
+  }
+
+  ${MEDIA_QUERY_SM} {
+    height: 40px;
+  }
 `;
 
 const WebsiteName = styled.div`
@@ -33,17 +56,28 @@ const WebsiteName = styled.div`
   color: ${blue.darker};
   width: 220px;
   line-height: 33px;
-  margin-left: 10px;
   letter-spacing: 1.5px;
 
   span {
     color: ${earth.honey};
   }
+
+  ${MEDIA_QUERY_LG} {
+    font-size: 22px;
+    line-height: 25px;
+    width: auto;
+  }
+
+  ${MEDIA_QUERY_SM} {
+    font-size: 18px;
+    line-height: 22px;
+    width: auto;
+  }
 `;
 
 const FooterDescription = styled.div`
   line-height: 30px;
-  font-size: 15px;
+  font-size: 16px;
   color: ${blue.darkest};
 
   span {
@@ -59,18 +93,48 @@ const FooterDescription = styled.div`
       color: ${earth.honey};
     }
   }
+
+  ${MEDIA_QUERY_LG} {
+    text-align: center;
+    font-size: 14px;
+    line-height: 25px;
+  }
+
+  ${MEDIA_QUERY_SM} {
+    text-align: center;
+    font-size: 12px;
+    line-height: 20px;
+  }
 `;
 
 const ContactUs = styled.div`
   padding: 0px 5vw;
+
+  ${MEDIA_QUERY_LG} {
+    padding: 0px;
+    border-top: 1px solid rgba(60, 63, 78, 0.1);
+    padding-top: 30px;
+    margin-top: 30px;
+  }
 `;
 
 const ContactUsTitle = styled.div`
   font-size: 26px;
   font-weight: bold;
-  margin: 15px 0px;
   letter-spacing: 3px;
   color: ${blue.darker};
+  display: flex;
+  align-items: center;
+
+  ${MEDIA_QUERY_LG} {
+    font-size: 23px;
+    justify-content: center;
+  }
+
+  ${MEDIA_QUERY_SM} {
+    font-size: 20px;
+    justify-content: center;
+  }
 `;
 
 const ContactUsContent = styled.div``;
@@ -79,6 +143,11 @@ const ContactUsDetail = styled.div`
   display: flex;
   align-items: center;
   margin-top: 25px;
+
+  ${MEDIA_QUERY_LG} {
+    justify-content: center;
+    margin-top: 20px;
+  }
 `;
 
 const ContactUsIcon = styled.div`
@@ -89,11 +158,29 @@ const ContactUsIcon = styled.div`
   background-size: contain;
   background-position: center;
   margin-right: 15px;
+
+  ${MEDIA_QUERY_LG} {
+    height: 25px;
+    width: 25px;
+  }
+
+  ${MEDIA_QUERY_SM} {
+    height: 20px;
+    width: 20px;
+  }
 `;
 
 const Email = styled.div`
   color: ${blue.darker};
   letter-spacing: 1px;
+
+  ${MEDIA_QUERY_LG} {
+    font-size: 15px;
+  }
+
+  ${MEDIA_QUERY_SM} {
+    font-size: 14px;
+  }
 `;
 
 function Footer() {
@@ -133,7 +220,10 @@ function Footer() {
         </FooterDescription>
       </FooterLeft>
       <ContactUs>
-        <ContactUsTitle>聯絡我們</ContactUsTitle>
+        <ContactUsTitle>
+          <WebsiteLogo src={websiteLogo} alt="Logo" />
+          聯絡我們
+        </ContactUsTitle>
         <ContactUsContent>
           <ContactUsDetail>
             <ContactUsIcon $img={emailIcon} />

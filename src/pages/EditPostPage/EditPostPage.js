@@ -4,38 +4,122 @@ import { useNavigate, useParams } from "react-router-dom";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import SideBar from "../../component/SideBar";
+import { GeneralBlock } from "../../component/Blocks";
 import { AuthContext } from "../../context";
 import { updatePost, getPost } from "../../WebAPI";
 import { getAuthToken, setAuthToken } from "../../utils/authorization";
-import { GeneralBlock } from "../../component/Blocks";
 import { blue, white } from "../../utils/colors";
+import {
+  MEDIA_QUERY_XL,
+  MEDIA_QUERY_LG,
+  MEDIA_QUERY_MD,
+  MEDIA_QUERY_SM,
+} from "../../utils/breakpoints";
 
 const Root = styled.div`
   display: flex;
   padding: 80px 0px 50px 7vw;
   background: ${white.swan};
+  position: relative;
+
+  ${MEDIA_QUERY_XL} {
+    padding: 80px 0px 50px 5vw;
+  }
+
+  ${MEDIA_QUERY_LG} {
+    padding: 80px 0px;
+  }
 `;
 
 const CreatePostContainer = styled.div`
-  width: 72%;
+  width: 66vw;
   margin-bottom: 60px;
+
+  ${MEDIA_QUERY_XL} {
+    width: 70vw;
+  }
+
+  ${MEDIA_QUERY_LG} {
+    margin: 0 auto;
+    width: 80vw;
+  }
+
+  ${MEDIA_QUERY_MD} {
+    margin: 0 auto;
+    width: 84vw;
+  }
+
+  ${MEDIA_QUERY_SM} {
+    margin: 0 auto;
+    width: 91vw;
+  }
 `;
 
 const CreatePost = styled.div`
   padding: 40px 5% 30px 6%;
   width: 90%;
+
+  ${MEDIA_QUERY_XL} {
+    padding: 35px 5% 30px 5%;
+    width: 93%;
+  }
+
+  ${MEDIA_QUERY_LG} {
+    padding: 30px 5% 30px 5%;
+    width: 95%;
+  }
+
+  ${MEDIA_QUERY_MD} {
+    padding: 25px 5% 30px 5%;
+    width: 96%;
+  }
+
+  ${MEDIA_QUERY_SM} {
+    padding: 25px 3% 30px 3%;
+    width: 99%;
+  }
 `;
 
 const PostTitle = styled.div`
   width: 90%;
   height: 40px;
-  margin-bottom: 45px;
+  margin-bottom: 40px;
+
+  ${MEDIA_QUERY_XL} {
+    margin-bottom: 35px;
+  }
+
+  ${MEDIA_QUERY_LG} {
+    height: 35px;
+  }
+
+  ${MEDIA_QUERY_MD} {
+    height: 32px;
+    margin-bottom: 30px;
+  }
+
+  ${MEDIA_QUERY_SM} {
+    height: 30px;
+    margin-bottom: 25px;
+  }
 
   input {
     height: 100%;
     width: 100%;
-    font-size: 16px;
+    font-size: 17px;
     border: 1px solid rgba(60, 63, 78, 0.2);
+
+    ${MEDIA_QUERY_LG} {
+      font-size: 16px;
+    }
+
+    ${MEDIA_QUERY_MD} {
+      font-size: 15px;
+    }
+
+    ${MEDIA_QUERY_SM} {
+      font-size: 14px;
+    }
 
     ::placeholder {
       color: #757575;
@@ -46,12 +130,45 @@ const PostTitle = styled.div`
 const PostCatagory = styled.div`
   margin-bottom: 40px;
 
+  ${MEDIA_QUERY_XL} {
+    margin-bottom: 35px;
+  }
+
+  ${MEDIA_QUERY_MD} {
+    margin-bottom: 30px;
+  }
+
+  ${MEDIA_QUERY_SM} {
+    margin-bottom: 25px;
+  }
+
   select {
     height: 40px;
-    font-size: 16px;
+    font-size: 17px;
     color: #757575;
     border: 1px solid rgba(60, 63, 78, 0.2);
     margin-right: 40px;
+
+    ${MEDIA_QUERY_XL} {
+      margin-right: 35px;
+    }
+
+    ${MEDIA_QUERY_LG} {
+      margin-right: 30px;
+      font-size: 16px;
+      height: 35px;
+    }
+
+    ${MEDIA_QUERY_MD} {
+      margin-right: 25px;
+      font-size: 15px;
+      height: 32px;
+    }
+
+    ${MEDIA_QUERY_SM} {
+      font-size: 14px;
+      height: 30px;
+    }
 
     option:not(first-child) {
       color: ${blue.dark};
@@ -64,10 +181,9 @@ const SubmitButton = styled.div`
   margin: 0 auto;
   align-items: center;
   justify-content: center;
-  border: 1px dashed ${blue.dark};
   color: ${blue.darker};
   border-radius: 3px;
-  width: 6vw;
+  width: 7vw;
   cursor: pointer;
   font-size: 18px;
   letter-spacing: 8px;
@@ -82,15 +198,67 @@ const SubmitButton = styled.div`
     background: ${white.beidge};
     border: none;
   }
+
+  ${MEDIA_QUERY_XL} {
+    width: 9vw;
+  }
+
+  ${MEDIA_QUERY_LG} {
+    width: 11vw;
+  }
+
+  ${MEDIA_QUERY_MD} {
+    font-size: 17px;
+    width: 13vw;
+    height: 45px;
+  }
+
+  ${MEDIA_QUERY_SM} {
+    font-size: 16px;
+    width: 19vw;
+    height: 40px;
+  }
 `;
 
 const CKEditorContainer = styled.div`
-  width: 58vw;
+  width: 53vw;
   margin-bottom: 60px;
+  font-size: 17px;
+
+  ${MEDIA_QUERY_XL} {
+    width: 56vw;
+  }
+
+  ${MEDIA_QUERY_LG} {
+    font-size: 16px;
+    width: 63vw;
+  }
+
+  ${MEDIA_QUERY_MD} {
+    font-size: 15px;
+    width: 65vw;
+  }
+
+  ${MEDIA_QUERY_SM} {
+    font-size: 14px;
+    width: 71vw;
+  }
+
   .ck-editor {
     .ck-editor__main {
       .ck-content {
         height: 700px;
+
+        ${MEDIA_QUERY_XL} {
+          height: 650px;
+        }
+
+        ${MEDIA_QUERY_LG} {
+          height: 600px;
+        }
+
+        ${MEDIA_QUERY_MD} {
+          height: 550px;
       }
     }
   }
@@ -98,15 +266,35 @@ const CKEditorContainer = styled.div`
 
 const ErrorMessage = styled.div`
   color: Red;
-  margin: 8px;
+  margin-bottom: 8px;
   font-weight: bold;
+
+  ${MEDIA_QUERY_XL} {
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
+
+  ${MEDIA_QUERY_LG} {
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+
+  ${MEDIA_QUERY_MD} {
+    font-size: 13px;
+    margin-bottom: 3px;
+  }
+
+  ${MEDIA_QUERY_SM} {
+    font-size: 12px;
+    margin-bottom: 2px;
+  }
 `;
 
 function EditPostPage() {
   const editorDataRef = useRef();
   const authorRef = useRef();
-  const { id } = useParams();
   const scrollIntoViewRef = useRef();
+  const { id } = useParams();
   const [title, setTitle] = useState("");
   const [errorMessage, setErrorMessage] = useState(false);
   const [category, setCategory] = useState("");
@@ -138,11 +326,10 @@ function EditPostPage() {
       setClassification(data.classification);
       setContent(data.body);
     });
-  }, [isConfirmingUser, id, user.id]);
+  }, [isConfirmingUser, id, user]);
 
   const handleSubmitUpdatePost = () => {
     setErrorMessage(null);
-    console.log("UP: ", authorRef.current);
 
     if (
       !title ||
@@ -154,9 +341,6 @@ function EditPostPage() {
       scrollIntoViewRef.current.scrollIntoView();
       return;
     }
-
-    console.log(authorRef.current);
-    console.log(user.id);
 
     if (authorRef.current !== user.id) {
       setErrorMessage("您沒有編輯文章的權限！");
@@ -223,7 +407,6 @@ function EditPostPage() {
                 value={title}
                 onFocus={handleFocus}
               />
-              {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
             </PostTitle>
             <PostCatagory>
               <select
@@ -256,6 +439,7 @@ function EditPostPage() {
                 </select>
               )}
             </PostCatagory>
+            {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
             <CKEditorContainer>
               <CKEditor
                 editor={ClassicEditor}

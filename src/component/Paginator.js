@@ -1,6 +1,12 @@
 import styled from "styled-components";
 import { useCallback } from "react";
 import { blue, white, earth } from "../utils/colors";
+import {
+  MEDIA_QUERY_XL,
+  MEDIA_QUERY_LG,
+  MEDIA_QUERY_MD,
+  MEDIA_QUERY_SM,
+} from "../utils/breakpoints";
 
 const PaginatorContainer = styled.div`
   display: flex;
@@ -19,8 +25,20 @@ const FoldPages = styled.div`
   justify-content: center;
   font-weight: bold;
   margin: 5px;
-  font-size: 14px;
+  font-size: 15px;
   border-radius: 5px;
+
+  ${MEDIA_QUERY_MD} {
+    height: 29px;
+    width: 29px;
+    font-size: 14px;
+  }
+
+  ${MEDIA_QUERY_SM} {
+    height: 25px;
+    width: 25px;
+    font-size: 13px;
+  }
 `;
 
 const ChangePage = styled(FoldPages)`
@@ -43,6 +61,14 @@ const Page = styled(ChangePage)`
     :hover {
       cursor: default;
       background: ${earth.wood};
+    }
+  `}
+
+  ${(props) =>
+    props.$hide &&
+    `
+    ${MEDIA_QUERY_SM} {
+      display: none;
     }
   `}
 `;
@@ -95,6 +121,7 @@ function Paginator({ currentPage, setCurrentPage, totalPage }) {
       {currentPage > 3 && <FoldPages>...</FoldPages>}
       {currentPage !== 1 && (
         <Page
+          $hide={currentPage > 3}
           onClick={() => {
             handleChangeCurrentPage("-");
           }}
@@ -102,9 +129,10 @@ function Paginator({ currentPage, setCurrentPage, totalPage }) {
           {currentPage - 1}
         </Page>
       )}
-      <Page $current={true}>{currentPage}</Page>
+      <Page $current>{currentPage}</Page>
       {currentPage !== totalPage && totalPage > 1 && (
         <Page
+          $hide={totalPage - currentPage > 2}
           onClick={() => {
             handleChangeCurrentPage("+");
           }}

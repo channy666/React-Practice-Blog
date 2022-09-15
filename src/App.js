@@ -17,10 +17,36 @@ import SpecialThanksPage from "./pages/SpecialThanksPage";
 import { AuthContext } from "./context";
 import { getAuthToken, setAuthToken } from "./utils/authorization";
 import { getMe } from "./WebAPI";
+import {
+  MEDIA_QUERY_XL,
+  MEDIA_QUERY_LG,
+  MEDIA_QUERY_MD,
+  MEDIA_QUERY_SM,
+} from "./utils/breakpoints";
+import { white } from "./utils/colors";
 
 const Wrapper = styled.div`
-  min-height: 600px;
+  min-height: 900px;
   min-width: 1200px;
+  background: ${white.swan};
+  width: 100%;
+  overflow: hidden;
+
+  ${MEDIA_QUERY_XL} {
+    min-width: 992px;
+  }
+
+  ${MEDIA_QUERY_LG} {
+    min-width: 768px;
+  }
+
+  ${MEDIA_QUERY_MD} {
+    min-width: 576px;
+  }
+
+  ${MEDIA_QUERY_SM} {
+    min-width: 360px;
+  }
 `;
 
 function App() {
@@ -64,7 +90,7 @@ function App() {
             <Route path="/Forum/:id" element={<ForumPage />} />
             <Route path="/CreatePost" element={<CreatePostPage />} />
             <Route path="/EditPost/:id" element={<EditPostPage />} />
-            <Route path="/Search/:value" element={<SearchPage />} />
+            <Route path="/Search/:searchValue" element={<SearchPage />} />
             <Route path="/Login" element={<LogInPage />} />
             <Route path="/SpecialThanks" element={<SpecialThanksPage />} />
             <Route path="*" element={<NotFoundPage />} />

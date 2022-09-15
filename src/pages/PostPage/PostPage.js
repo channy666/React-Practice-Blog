@@ -14,37 +14,116 @@ import authorIcon from "../../utils/images/author.png";
 import starIcon from "../../utils/images/star.png";
 import dateIcon from "../../utils/images/calendar1.png";
 import StarButton from "../../component/StarButton";
+import Loading from "../../component/Loading";
+import {
+  MEDIA_QUERY_XL,
+  MEDIA_QUERY_LG,
+  MEDIA_QUERY_MD,
+  MEDIA_QUERY_SM,
+} from "../../utils/breakpoints";
 
 const Root = styled.div`
   display: flex;
   padding: 80px 0px 50px 7vw;
   background: ${white.swan};
-`;
+  position: relative;
 
-const Wrapper = styled.div`
-  padding-bottom: 50px;
+  ${MEDIA_QUERY_XL} {
+    padding: 80px 0px 50px 5vw;
+  }
+
+  ${MEDIA_QUERY_LG} {
+    padding: 80px 0px 70px 0px;
+  }
 `;
 
 const PostContainer = styled.div`
   width: 65vw;
   margin-bottom: 100px;
+
+  ${MEDIA_QUERY_XL} {
+    width: 70vw;
+    margin-bottom: 80px;
+  }
+
+  ${MEDIA_QUERY_LG} {
+    margin: 0 auto;
+    width: 75vw;
+  }
+
+  ${MEDIA_QUERY_MD} {
+    margin: 0 auto;
+    width: 80vw;
+  }
+
+  ${MEDIA_QUERY_SM} {
+    margin: 0 auto;
+    width: 85vw;
+  }
+`;
+
+const Wrapper = styled.div`
+  padding-bottom: 50px;
+
+  ${MEDIA_QUERY_XL} {
+    padding-bottom: 20px;
+  }
+
+  ${MEDIA_QUERY_MD} {
+    padding-bottom: 25px;
+  }
 `;
 
 const Post = styled.div`
   padding: 30px 0px 40px 3vw;
   width: 95%;
   box-sizing: border-box;
+
+  ${MEDIA_QUERY_XL} {
+    padding: 22px 0px 30px 2.5vw;
+  }
+
+  ${MEDIA_QUERY_LG} {
+    padding: 22px 0px 20px 2.5vw;
+  }
+
+  ${MEDIA_QUERY_MD} {
+    width: 100%;
+  }
+
+  ${MEDIA_QUERY_SM} {
+    padding: 22px 0px 20px 3vw;
+    width: 100%;
+  }
 `;
 
 const PostTitle = styled.div`
   font-size: 28px;
   font-weight: bold;
   margin-bottom: 30px;
-  color: #391d46;
   word-break: break-word;
   over-flow: wrap;
   letter-spacing: 1.5px;
   color: ${earth.wood};
+
+  ${MEDIA_QUERY_XL} {
+    font-size: 25px;
+  }
+
+  ${MEDIA_QUERY_LG} {
+    font-size: 23px;
+    margin-bottom: 22px;
+  }
+
+  ${MEDIA_QUERY_MD} {
+    font-size: 20px;
+    margin-bottom: 19px;
+  }
+
+  ${MEDIA_QUERY_SM} {
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
 `;
 
 const PostInfo = styled.div`
@@ -54,12 +133,39 @@ const PostInfo = styled.div`
   display: flex;
   height: 35px;
   justify-content: space-between;
+
+  ${MEDIA_QUERY_XL} {
+    margin-bottom: 50px;
+  }
+
+  ${MEDIA_QUERY_LG} {
+    font-size: 15px;
+    margin-bottom: 40px;
+  }
+
+  ${MEDIA_QUERY_MD} {
+    font-size: 13px;
+    margin-bottom: 35px;
+  }
+
+  ${MEDIA_QUERY_SM} {
+    font-size: 9px;
+    margin-bottom: 35px;
+  }
 `;
 
 const PostInfoLeft = styled.div`
   align-items: center;
   display: flex;
   margin-right: 2vw;
+
+  ${MEDIA_QUERY_XL} {
+    margin-right: 1.5vw;
+  }
+
+  ${MEDIA_QUERY_MD} {
+    margin-right: 1vw;
+  }
 `;
 
 const PostDate = styled.div`
@@ -69,6 +175,14 @@ const PostDate = styled.div`
   letter-spacing: 2px;
   display: flex;
   align-items: center;
+
+  ${MEDIA_QUERY_MD} {
+    letter-spacing: 1.5px;
+  }
+
+  ${MEDIA_QUERY_SM} {
+    letter-spacing: 1px;
+  }
 `;
 
 const PostDateIcon = styled.div`
@@ -81,6 +195,23 @@ const PostDateIcon = styled.div`
   display: flex;
   align-self: center;
   margin-right: 8px;
+
+  ${MEDIA_QUERY_LG} {
+    height: 21px;
+    width: 21px;
+  }
+
+  ${MEDIA_QUERY_MD} {
+    height: 20px;
+    width: 20px;
+    margin-right: 6px;
+  }
+
+  ${MEDIA_QUERY_SM} {
+    height: 16px;
+    width: 16px;
+    margin-right: 4px;
+  }
 `;
 
 const PostAuthor = styled.div`
@@ -96,9 +227,35 @@ const PostAuthorContent = styled.div`
   overflow-y: hidden;
   white-space: nowrap;
   width: 35vw;
+
+  ${MEDIA_QUERY_XL} {
+    width: 33vw;
+  }
+
+  ${MEDIA_QUERY_LG} {
+    width: 31vw;
+  }
+
+  ${MEDIA_QUERY_MD} {
+    width: 27vw;
+  }
+
+  ${MEDIA_QUERY_SM} {
+    width: 22vw;
+  }
 `;
 
-const PostAuthorIcon = styled(PostDateIcon)``;
+const PostAuthorIcon = styled(PostDateIcon)`
+  margin-right: 5px;
+
+  ${MEDIA_QUERY_MD} {
+    margin-right: 2px;
+  }
+
+  ${MEDIA_QUERY_SM} {
+    margin-right: 1px;
+  }
+`;
 
 const PostContent = styled.div`
   white-space: pre-wrap;
@@ -107,6 +264,41 @@ const PostContent = styled.div`
   letter-spacing: 2px;
   line-height: 35px;
   color: ${blue.darkest};
+
+  img {
+    width: 90%;
+    height: auto;
+  }
+
+  ${MEDIA_QUERY_LG} {
+    font-size: 17px;
+  }
+
+  ${MEDIA_QUERY_MD} {
+    font-size: 16px;
+    letter-spacing: 1.5px;
+  }
+
+  ${MEDIA_QUERY_SM} {
+    font-size: 15px;
+    letter-spacing: 1px;
+    line-height: 30px;
+  }
+
+  img {
+    width: 90%;
+    height: auto;
+
+    ${MEDIA_QUERY_MD} {
+      :hover {
+        transform: scale(1.25);
+      }
+    }
+
+    ${MEDIA_QUERY_SM} {
+      width: 95%;
+    }
+  }
 `;
 
 const PostStarCount = styled(PostDate)`
@@ -119,16 +311,6 @@ const PostStarCount = styled(PostDate)`
 `;
 
 const PostStarIcon = styled(PostDateIcon)``;
-
-const Loading = styled.div`
-  width: 100%;
-  height: 400px;
-  font-size: 36px;
-  font-weight: bold;
-  text-align: center;
-  padding-top: 50px;
-  letter-spacing: 3px;
-`;
 
 function PostPage() {
   const { id } = useParams();
@@ -145,10 +327,8 @@ function PostPage() {
     setError(false);
     getPost(id)
       .then((data) => {
-        // 找不到資料會回傳空物件
         if (JSON.stringify(data) === "{}") {
-          setError("postId");
-          return;
+          return setError("postId");
         }
         if (data.category !== "Research" && data.category !== "Analysis") {
           return navigate(`/Forum/${data.id}`);

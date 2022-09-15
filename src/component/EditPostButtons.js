@@ -4,6 +4,12 @@ import { useNavigate } from "react-router-dom";
 import { setAuthToken } from "../utils/authorization";
 import { getMe, deletePost } from "../WebAPI";
 import { white, earth } from "../utils/colors";
+import {
+  MEDIA_QUERY_XL,
+  MEDIA_QUERY_LG,
+  MEDIA_QUERY_MD,
+  MEDIA_QUERY_SM,
+} from "../utils/breakpoints";
 
 const EditPost = styled.div`
   display: flex;
@@ -19,11 +25,30 @@ const UpdatePost = styled.div`
   color: ${white.beidge};
   justify-content: center;
   border: 1.5px solid ${white.beidge};
-  margin-right: 50px;
+  margin-right: 60px;
   letter-spacing: 2px;
   margin-bottom: 30px;
   border-radius: 5px;
   box-sizing: border-box;
+  font-size: 16px;
+
+  ${MEDIA_QUERY_LG} {
+    font-size: 15px;
+    margin-right: 50px;
+  }
+
+  ${MEDIA_QUERY_MD} {
+    height: 35px;
+    width: 33%;
+    margin-right: 40px;
+  }
+
+  ${MEDIA_QUERY_SM} {
+    font-size: 14px;
+    height: 33px;
+    width: 35%;
+    margin-right: 30px;
+  }
 
   :hover {
     color: ${earth.honey};

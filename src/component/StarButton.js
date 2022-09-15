@@ -4,17 +4,54 @@ import { Link, useLocation } from "react-router-dom";
 import { blue, white, earth } from "../utils/colors";
 import starIcon from "../utils/images/star.png";
 import { updatePost } from "../WebAPI";
+import {
+  MEDIA_QUERY_XL,
+  MEDIA_QUERY_LG,
+  MEDIA_QUERY_MD,
+  MEDIA_QUERY_SM,
+} from "../utils/breakpoints";
 
 const StarButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 50px;
+
+  ${MEDIA_QUERY_XL} {
+    margin-top: 10px;
+  }
+
+  ${MEDIA_QUERY_MD} {
+    margin-top: 30px;
+  }
+
+  ${MEDIA_QUERY_SM} {
+    margin-top: 15px;
+  }
 `;
 
 const StarDescription = styled.div`
   color: ${earth.wood};
   margin: 30px 0px 40px 0px;
+  font-size: 16px;
+
+  ${MEDIA_QUERY_XL} {
+    font-size: 16px;
+  }
+
+  ${MEDIA_QUERY_LG} {
+    font-size: 15px;
+    margin: 20px 0px 30px 0px;
+  }
+
+  ${MEDIA_QUERY_MD} {
+    font-size: 15px;
+  }
+
+  ${MEDIA_QUERY_SM} {
+    font-size: 14px;
+    margin: 10px 10px 30px 10px;
+  }
 `;
 
 const StarCount = styled.div`
@@ -35,14 +72,33 @@ const StarCount = styled.div`
   cursor: pointer;
   background: ${white.white};
 
+  ${MEDIA_QUERY_MD} {
+    font-size: 20px;
+    height: 45px;
+    padding: 10px;
+  }
+
+  :hover {
+    border: 1.5px solid ${earth.honey};
+  }
+
   ${(props) =>
     props.$clicked &&
     `
     box-shadow: 3px 5px 2px #666;
     transform: translateY(4px);
-    color: ${earth.sun};
+    color: ${earth.honey};
     font-size: 24px;
-    border: 1px solid rgba(60, 63, 78, 0.2);
+    border: 1.5px solid ${earth.honey};
+
+    ${MEDIA_QUERY_MD} {
+      font-size: 22px;
+    }
+
+    & :first-child {
+      transform: rotate(360deg);
+      transition: all 1.5s;
+    }
   `}
 
   ${(props) =>
@@ -64,6 +120,12 @@ const StarIcon = styled.div`
   align-self: center;
   margin-right: 10px;
   z-index: 3;
+
+  ${MEDIA_QUERY_MD} {
+    height: 25px;
+    width: 25px;
+    margin-right: 7px;
+  }
 `;
 
 const StarReminder = styled(StarDescription)`
@@ -88,6 +150,13 @@ function StarButton({ starInfo, user, postId }) {
   const location = useLocation();
 
   useEffect(() => {
+    starRef.current = {
+      ...starRef.current,
+      currentCount: star.count,
+    };
+  }, [star, starRef]);
+
+  useEffect(() => {
     return () => {
       let { initialCount, currentCount, userId } = starRef.current;
       if (initialCount === currentCount) return;
@@ -106,13 +175,6 @@ function StarButton({ starInfo, user, postId }) {
       updatePost(postId, newStarInfo);
     };
   }, [location.pathname, starRef, user, postId]);
-
-  useEffect(() => {
-    starRef.current = {
-      ...starRef.current,
-      currentCount: star.count,
-    };
-  }, [star, starRef]);
 
   const handleButtonClick = useCallback(() => {
     if (!user) return setReminder(true);
@@ -141,7 +203,10 @@ function StarButton({ starInfo, user, postId }) {
       </StarCount>
       <StarReminder $display={reminder}>
         {"請先 "}
-        <Link to="/Login">註冊 / 登入</Link>！
+        <Link to="/Login" state={location.pathname}>
+          註冊 / 登入
+        </Link>
+        ！
       </StarReminder>
     </StarButtonContainer>
   );

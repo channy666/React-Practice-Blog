@@ -2,17 +2,51 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { ErrorBlock } from "../../component/Blocks";
 import { white, blue, earth } from "../../utils/colors";
+import {
+  MEDIA_QUERY_XL,
+  MEDIA_QUERY_LG,
+  MEDIA_QUERY_MD,
+  MEDIA_QUERY_SM,
+} from "../../utils/breakpoints";
 
 const Root = styled.div`
   padding: 40px 0;
   height: 900px;
   background: ${white.swan};
+
+  ${MEDIA_QUERY_LG} {
+    height: 800px;
+  }
+
+  ${MEDIA_QUERY_MD} {
+    height: 750px;
+  }
+
+  ${MEDIA_QUERY_SM} {
+    padding: 20px 0;
+  }
 `;
 
 const Container = styled.div`
   width: 45%;
   margin: 0 auto;
   padding: 50px 0px;
+
+  ${MEDIA_QUERY_XL} {
+    width: 60%;
+  }
+
+  ${MEDIA_QUERY_LG} {
+    width: 65%;
+  }
+
+  ${MEDIA_QUERY_MD} {
+    width: 70%;
+  }
+
+  ${MEDIA_QUERY_SM} {
+    width: 80%;
+  }
 `;
 
 const ErrorMessage = styled.div`
@@ -21,14 +55,37 @@ const ErrorMessage = styled.div`
   text-align: center;
   justify-content: center;
   color: ${blue.dark};
+
+  ${MEDIA_QUERY_LG} {
+    font-size: 25px;
+  }
+
+  ${MEDIA_QUERY_MD} {
+    font-size: 22px;
+  }
+
+  ${MEDIA_QUERY_SM} {
+    font-size: 18px;
+  }
 `;
 
 const NavButtons = styled.div`
   display: flex;
-  margin-top: 30px;
   justify-content: center;
   margin: 50px 10%;
   flex-wrap: wrap;
+
+  ${MEDIA_QUERY_LG} {
+    margin: 30px 10%;
+  }
+
+  ${MEDIA_QUERY_MD} {
+    margin: 25px 10%;
+  }
+
+  ${MEDIA_QUERY_SM} {
+    margin: 15px 6%;
+  }
 `;
 
 const Nav = styled.div`
@@ -55,13 +112,28 @@ const Nav = styled.div`
     border: none;
     color: ${earth.wood};
   }
+
+  ${MEDIA_QUERY_LG} {
+    margin: 30px 6% 30px 6%;
+  }
+
+  ${MEDIA_QUERY_MD} {
+    margin: 30px 5% 25px 5%;
+    width: 40%;
+  }
+
+  ${MEDIA_QUERY_SM} {
+    font-size: 16px;
+    margin: 20px 6% 12px 6%;
+    width: 50%;
+  }
 `;
 
 function NotFoundPage() {
   return (
     <Root>
       <Container>
-        <ErrorBlock backgroundColor={white.beidge}>
+        <ErrorBlock backgroundColor="rgba(226, 217, 195, 0.6)">
           <ErrorMessage>頁面不存在，請嘗試其他頁面</ErrorMessage>
           <NavButtons>
             <Nav as={Link} to="/">

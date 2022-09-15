@@ -12,19 +12,55 @@ import starIcon from "../../utils/images/star.png";
 import authorIcon from "../../utils/images/author.png";
 import dateIcon from "../../utils/images/calendar1.png";
 import StarButton from "../../component/StarButton";
+import Loading from "../../component/Loading";
+import {
+  MEDIA_QUERY_XL,
+  MEDIA_QUERY_LG,
+  MEDIA_QUERY_MD,
+  MEDIA_QUERY_SM,
+} from "../../utils/breakpoints";
 
 const Root = styled.div`
   display: flex;
   padding: 80px 0px 50px 7vw;
   background: ${white.swan};
+  position: relative;
+
+  ${MEDIA_QUERY_XL} {
+    padding: 80px 0px 50px 5vw;
+  }
+
+  ${MEDIA_QUERY_LG} {
+    padding: 80px 0px 50px 0px;
+  }
 `;
 
 const ForumContainer = styled.div`
   width: 55vw;
   margin: 0 0 10vh 4vw;
+
+  ${MEDIA_QUERY_XL} {
+    width: 62vw;
+    margin: 0 0 10vh 3vw;
+  }
+
+  ${MEDIA_QUERY_LG} {
+    margin: 0 auto;
+    width: 69vw;
+  }
+
+  ${MEDIA_QUERY_MD} {
+    margin: 0 auto;
+    width: 73vw;
+  }
+
+  ${MEDIA_QUERY_SM} {
+    margin: 0 auto;
+    width: 76vw;
+  }
 `;
 
-const Reminder = styled(ForumContainer)`
+const ErrorMessage = styled(ForumContainer)`
   font-size: 36px;
   font-weight: bold;
   text-align: center;
@@ -34,6 +70,22 @@ const ForumTitle = styled.div`
   font-weight: bold;
   font-size: 32px;
   color: ${earth.wood};
+
+  ${MEDIA_QUERY_XL} {
+    font-size: 29px;
+  }
+
+  ${MEDIA_QUERY_LG} {
+    font-size: 26px;
+  }
+
+  ${MEDIA_QUERY_MD} {
+    font-size: 23px;
+  }
+
+  ${MEDIA_QUERY_SM} {
+    font-size: 20px;
+  }
 `;
 
 const ForumInfo = styled.div`
@@ -43,6 +95,21 @@ const ForumInfo = styled.div`
   font-size: 16px;
   justify-content: space-between;
   color: ${earth.wood};
+
+  ${MEDIA_QUERY_LG} {
+    font-size: 15px;
+    margin: 20px 0;
+  }
+
+  ${MEDIA_QUERY_MD} {
+    font-size: 14px;
+    margin: 15px 0;
+  }
+
+  ${MEDIA_QUERY_SM} {
+    font-size: 12px;
+    margin: 10px 0;
+  }
 `;
 
 const ForumInfoRight = styled.div`
@@ -54,6 +121,16 @@ const ForumDate = styled.div`
   letter-spacing: 2px;
   display: flex;
   align-items: center;
+
+  ${MEDIA_QUERY_MD} {
+    letter-spacing: 1px;
+    margin-right: 3%;
+  }
+
+  ${MEDIA_QUERY_SM} {
+    letter-spacing: 0.8px;
+    margin-right: 2%;
+  }
 `;
 
 const ForumDateIcon = styled.div`
@@ -66,6 +143,23 @@ const ForumDateIcon = styled.div`
   display: flex;
   align-self: center;
   margin-right: 8px;
+
+  ${MEDIA_QUERY_LG} {
+    height: 21px;
+    width: 21px;
+  }
+
+  ${MEDIA_QUERY_MD} {
+    height: 20px;
+    width: 20px;
+    margin-right: 6px;
+  }
+
+  ${MEDIA_QUERY_SM} {
+    height: 16px;
+    width: 16px;
+    margin-right: 5px;
+  }
 `;
 
 const ForumAuthor = styled.div`
@@ -76,6 +170,14 @@ const ForumAuthor = styled.div`
 
 const ForumAuthorIcon = styled(ForumDateIcon)`
   margin-right: 5px;
+
+  ${MEDIA_QUERY_MD} {
+    margin-right: 3px;
+  }
+
+  ${MEDIA_QUERY_SM} {
+    margin-right: 2px;
+  }
 `;
 
 const ForumAuthorContent = styled.div`
@@ -84,6 +186,14 @@ const ForumAuthorContent = styled.div`
   overflow-y: hidden;
   white-space: nowrap;
   width: 35vw;
+
+  ${MEDIA_QUERY_MD} {
+    width: 34vw;
+  }
+
+  ${MEDIA_QUERY_SM} {
+    width: 25vw;
+  }
 `;
 
 const ForumStarCount = styled.div`
@@ -93,6 +203,14 @@ const ForumStarCount = styled.div`
   letter-spacing: 1.5px;
   padding: 8px 10px;
   border-radius: 5px;
+
+  ${MEDIA_QUERY_MD} {
+    letter-spacing: 1px;
+  }
+
+  ${MEDIA_QUERY_SM} {
+    letter-spacing: 0.8px;
+  }
 
   ${(props) =>
     props.$starClicked &&
@@ -111,26 +229,50 @@ const ForumImage = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   box-shadow: inset 0px 0px 5px 5px ${white.swan};
+
+  ${MEDIA_QUERY_MD} {
+    height: 45vw;
+  }
+
+  ${MEDIA_QUERY_SM} {
+    height: 55vw;
+  }
 `;
 
 const ForumContent = styled.div`
   white-space: pre-wrap;
   word-break: break-word;
-  margin: 5vh 0;
+  margin: 30px 0 40px 0;
   line-height: 30px;
   letter-spacing: 1.2px;
   color: ${blue.darkest};
+  font-size: 17px;
+
+  ${MEDIA_QUERY_LG} {
+    font-size: 16.5px;
+  }
+
+  ${MEDIA_QUERY_MD} {
+    font-size: 16px;
+    line-height: 27px;
+  }
+
+  ${MEDIA_QUERY_SM} {
+    font-size: 15px;
+    margin: 20px 0;
+    line-height: 24px;
+  }
 `;
 
 function ForumPage() {
   const { id } = useParams();
   const [forumData, setForumData] = useState();
-  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState();
   const [error, setError] = useState(false);
   const { user, setUser } = useContext(AuthContext);
   const [star, setStar] = useState({});
   const starRef = useRef();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setIsLoading(true);
@@ -169,8 +311,8 @@ function ForumPage() {
   return (
     <Root>
       <SideBar />
-      {error && <Reminder>資料有誤，請稍後再試</Reminder>}
-      {isLoading && !error && <Reminder>Loading...</Reminder>}
+      {error && <ErrorMessage>資料有誤，請稍後再試</ErrorMessage>}
+      {isLoading && !error && <Loading size="big">Loading...</Loading>}
       {!error && !isLoading && forumData && (
         <ForumContainer>
           {user && (
