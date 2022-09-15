@@ -1,12 +1,7 @@
 import styled from "styled-components";
 import { useCallback } from "react";
 import { blue, white, earth } from "../utils/colors";
-import {
-  MEDIA_QUERY_XL,
-  MEDIA_QUERY_LG,
-  MEDIA_QUERY_MD,
-  MEDIA_QUERY_SM,
-} from "../utils/breakpoints";
+import { MEDIA_QUERY_MD, MEDIA_QUERY_SM } from "../utils/breakpoints";
 
 const PaginatorContainer = styled.div`
   display: flex;

@@ -15,7 +15,6 @@ import { white, earth, blue } from "../utils/colors";
 import {
   MEDIA_QUERY_XL,
   MEDIA_QUERY_LG,
-  MEDIA_QUERY_MD,
   MEDIA_QUERY_SM,
 } from "../utils/breakpoints";
 import HamburgerButton from "../component/HamburgerButton";

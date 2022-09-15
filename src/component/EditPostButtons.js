@@ -5,7 +5,6 @@ import { setAuthToken } from "../utils/authorization";
 import { getMe, deletePost } from "../WebAPI";
 import { white, earth } from "../utils/colors";
 import {
-  MEDIA_QUERY_XL,
   MEDIA_QUERY_LG,
   MEDIA_QUERY_MD,
   MEDIA_QUERY_SM,

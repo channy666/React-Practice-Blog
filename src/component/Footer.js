@@ -3,12 +3,7 @@ import { memo } from "react";
 import { blue, earth, white } from "../utils/colors";
 import websiteLogo from "../utils/images/LOGO.png";
 import emailIcon from "../utils/images/email.png";
-import {
-  MEDIA_QUERY_XL,
-  MEDIA_QUERY_LG,
-  MEDIA_QUERY_MD,
-  MEDIA_QUERY_SM,
-} from "../utils/breakpoints";
+import { MEDIA_QUERY_LG, MEDIA_QUERY_SM } from "../utils/breakpoints";
 
 const FooterContainer = styled.div`
   width: 100%;
