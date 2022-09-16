@@ -207,6 +207,10 @@ const PostStarIcon = styled(PostDateIcon)`
 const PostAuthor = styled(PostDate)`
   white-space: nowrap;
   width: auto;
+
+  ${MEDIA_QUERY_SM} {
+    font-size: 13px;
+  }
 `;
 
 const PostAuthorIcon = styled(PostDateIcon)`
