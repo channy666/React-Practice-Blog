@@ -23,7 +23,7 @@ const Wrapper = styled.div``;
 
 const HeaderContainer = styled.div`
   display: flex;
-  height: 150px;
+  height: 175px;
   background: ${white.swan};
   width: 100%;
   justify-content: space-between;
@@ -33,9 +33,10 @@ const HeaderContainer = styled.div`
   border-bottom: 1px solid rgba(60, 63, 78, 0.1);
   align-items: center;
   z-index: 2;
+  padding-top: 40px;
 
   ${MEDIA_QUERY_LG} {
-    height: 125px;
+    height: 145px;
   }
 `;
 

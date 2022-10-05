@@ -461,9 +461,9 @@ function ContactUsPage() {
               清華大學區塊鏈法律與政策研究中心
             </SpecialThanksTitle>
             <SpecialThanksDiscription>
-              感謝<span>清華大學區塊鏈法律與政策研究中心</span>
+              網站內文章皆引用自
               <br />
-              同意本站引用專業之區塊鏈、科技法律相關文章
+              <span>清華大學區塊鏈法律與政策研究中心</span>
               <br />
               更多資訊請見
             </SpecialThanksDiscription>

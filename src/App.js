@@ -23,7 +23,7 @@ import {
   MEDIA_QUERY_MD,
   MEDIA_QUERY_SM,
 } from "./utils/breakpoints";
-import { white } from "./utils/colors";
+import { white, earth } from "./utils/colors";
 
 const Wrapper = styled.div`
   min-height: 900px;
@@ -46,6 +46,36 @@ const Wrapper = styled.div`
 
   ${MEDIA_QUERY_SM} {
     min-width: 360px;
+  }
+`;
+
+const Declaration = styled.div`
+  width: 100%;
+  display: flex;
+  background: rgba(101, 37, 26, 0.75);
+  color: ${white.white};
+  align-items: center;
+  justify-content: center;
+  height: 45px;
+  position: fixed;
+  top: 0;
+  z-index: 5;
+  font-weight: bold;
+  letter-spacing: 3px;
+  font-size: 20px;
+
+  ${MEDIA_QUERY_LG} {
+    font-size: 18px;
+    height: 40px;
+  }
+
+  ${MEDIA_QUERY_SM} {
+    font-size: 16px;
+    height: 35px;
+  }
+
+  span {
+    color: ${earth.honey};
   }
 `;
 
@@ -80,6 +110,7 @@ function App() {
       }}
     >
       <Wrapper>
+        <Declaration>【網站聲明】本網站僅作為個人練習用</Declaration>
         <Router>
           <Header />
           <Routes>

@@ -191,7 +191,7 @@ function Footer() {
           </WebsiteName>
         </WebsiteBrand>
         <FooterDescription>
-          本網站為練習用網站，文章皆引用自
+          <span>【網站聲明】</span>本網站為練習用網站，文章皆引用自
           <span>清華大學區塊鏈法律與政策研究中心</span>
           ，僅文章內之星星數為虛構。
           <br />
