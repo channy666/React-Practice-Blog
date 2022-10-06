@@ -241,7 +241,7 @@ const PostAuthorContent = styled.div`
   }
 
   ${MEDIA_QUERY_SM} {
-    width: 22vw;
+    width: 23vw;
   }
 `;
 

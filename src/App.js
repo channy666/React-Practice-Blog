@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { useState, useEffect } from "react";
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./component/Header";
@@ -49,29 +49,75 @@ const Wrapper = styled.div`
   }
 `;
 
-const Declaration = styled.div`
+const marquee1 = keyframes`
+  from {transform: translateX(100%)}
+  to {transform: translateX(-100%)}
+`;
+
+const marquee2 = keyframes`
+  from {transform: translateX(0%)}
+  to {transform: translateX(-200%)}
+`;
+
+const DeclarationContainer = styled.div`
   width: 100%;
   display: flex;
   background: rgba(101, 37, 26, 0.75);
   color: ${white.white};
-  align-items: center;
-  justify-content: center;
-  height: 45px;
+  z-index: 5;
   position: fixed;
   top: 0;
-  z-index: 5;
+  height: 45px;
+
+  ${MEDIA_QUERY_LG} {
+    height: 40px;
+  }
+
+  ${MEDIA_QUERY_SM} {
+    height: 35px;
+  }
+
+  & :nth-child(1) {
+    ${MEDIA_QUERY_LG} {
+      animation: ${marquee1} 30s linear infinite;
+    }
+  }
+
+  & :nth-child(2) {
+    display: none;
+
+    ${MEDIA_QUERY_LG} {
+      display: flex;
+      animation: ${marquee2} 30s linear infinite;
+      animation-delay: -15s;
+    }
+  }
+`;
+
+const Declaration = styled.div`
+  display: flex;
+  background: transparent;
+  color: ${white.white};
+  align-items: center;
+  margin: 0 auto;
+  z-index: 6;
   font-weight: bold;
   letter-spacing: 3px;
   font-size: 20px;
+  height: 45px;
+  white-space: nowrap;
 
   ${MEDIA_QUERY_LG} {
     font-size: 18px;
     height: 40px;
+    min-width: 992px;
+    justify-content: left;
   }
 
   ${MEDIA_QUERY_SM} {
     font-size: 16px;
     height: 35px;
+    min-width: 890px;
   }
 
   span {
@@ -110,7 +156,14 @@ function App() {
       }}
     >
       <Wrapper>
-        <Declaration>【網站聲明】本網站僅作為個人練習用</Declaration>
+        <DeclarationContainer>
+          <Declaration>
+            『網站聲明』本網站為練習用網站，所有資料皆取材自公開資源，不代表任何官方網站與立場。
+          </Declaration>
+          <Declaration>
+            【網站聲明】本網站為練習用網站，所有資料皆取材自公開資源，不代表任何官方網站與立場。
+          </Declaration>
+        </DeclarationContainer>
         <Router>
           <Header />
           <Routes>

@@ -66,7 +66,6 @@ const jumpingLetter = keyframes`
   0%   {bottom: 0px;}
   50%  {bottom: 8px;}
   100% {bottom: 0px;}
-
 `;
 
 const Message = styled.div`
